@@ -13,7 +13,7 @@ class YouMayAlsoLike extends React.Component {
   }
 
   componentDidMount () {
-    let id = window.location.pathname.slice(1);
+    let id = window.location.href.match(/localhost:\d{4}\/(\d+)/) ? window.location.href.match(/localhost:\d{4}\/(\d+)/)[1] : 0;
 
     if (!id) {
       id = 1;
@@ -25,8 +25,9 @@ class YouMayAlsoLike extends React.Component {
   getRelatedItems (id) {
     axios.get(`/youMayAlsoLike/${id}`)
       .then((response) => {
+        const unwrapped = response.data.map(item => item.info);
         this.setState({
-          relateditems: response.data
+          relateditems: unwrapped
         });
       })
       .catch((error) => {

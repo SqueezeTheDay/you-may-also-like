@@ -1,3 +1,5 @@
+// loads example date to mongoDB on npm run seed
+
 const db = require('../db/index');
 const exampleData = require('../db/exampleData');
 
